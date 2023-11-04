@@ -2,6 +2,7 @@ package com.example.propagation
 
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.scheduling.annotation.Async
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 
 @Component
@@ -12,6 +13,7 @@ class CustomProducer(
 
     @Async
     fun send(userInfo: UserInfo) {
+        val authentication = SecurityContextHolder.getContext().authentication
         kafkaTemplate.send("testTopic", userInfo)
     }
 
