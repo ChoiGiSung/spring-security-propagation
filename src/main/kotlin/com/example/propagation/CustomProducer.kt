@@ -1,6 +1,7 @@
 package com.example.propagation
 
 import org.springframework.kafka.core.KafkaTemplate
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 
 @Component
@@ -8,15 +9,15 @@ class CustomProducer(
     private val kafkaTemplate: KafkaTemplate<String, Any>
 ) {
 
+
+    @Async
     fun send(userInfo: UserInfo) {
         kafkaTemplate.send("testTopic", userInfo)
     }
+
+    @Async
     fun send(otherInfo: OtherUserInfo) {
         kafkaTemplate.send("testTopic", otherInfo)
-    }
-
-    fun sendToRetryTopic(userInfo: UserInfo) {
-        kafkaTemplate.send("testTopic-coco-retry-0", userInfo)
     }
 
     data class UserInfo(

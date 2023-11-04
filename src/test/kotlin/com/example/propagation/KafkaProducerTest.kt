@@ -8,20 +8,16 @@ import org.springframework.boot.test.context.SpringBootTest
 class KafkaProducerTest {
 
 	@Autowired
-	lateinit var producer: CustomProducer
+	lateinit var service: SampleService
 
 	@Test
 	fun something() {
-		producer.send(CustomProducer.UserInfo("홍길동", "010-1234-5678", "홍홍"))
+		service.send(CustomProducer.UserInfo("홍길동", "010-1234-5678", "홍홍"))
 	}
 
 	@Test
 	fun something2() {
-		producer.send(CustomProducer.OtherUserInfo("홍길동", 12))
+		service.send(CustomProducer.OtherUserInfo("홍길동", 12))
 	}
 
-	@Test
-	fun something3() {
-		producer.sendToRetryTopic(CustomProducer.UserInfo("홍길동", "010-1234-5678", "홍홍"))
-	}
 }
